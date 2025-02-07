@@ -1,0 +1,29 @@
+trigger:
+  branches:
+    include:
+      - main  # Runs on push to main branch
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: Docker@2
+    displayName: 'Login to Docker Hub'
+    inputs:
+      command: login
+      containerRegistry: 'dockerhub'
+
+  - task: Docker@2
+    displayName: 'Build Docker Image'
+    inputs:
+      command: build
+      repository: bluesurviver/library-borrowing-system
+      dockerfile: '**/Dockerfile'
+      tags: latest
+
+  - task: Docker@2
+    displayName: 'Push Docker Image to Docker Hub'
+    inputs:
+      command: push
+      repository: bluesurviver/library-borrowing-system
+      tags: latest
