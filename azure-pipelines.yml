@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - main
+      - main  # Runs on push to main branch
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -11,7 +11,7 @@ steps:
     displayName: 'Login to Docker Hub'
     inputs:
       command: login
-      containerRegistry: 'DockerHubConnection'
+      containerRegistry: 'DockerHubConnection'  # Make sure this matches your service connection name
 
   - task: Docker@2
     displayName: 'Build Docker Image'
@@ -32,7 +32,7 @@ steps:
     displayName: 'Deploy to AKS'
     inputs:
       connectionType: 'Kubernetes Service Connection'
-      kubernetesServiceEndpoint: 'KubernetesServiceConnection'
+      kubernetesServiceEndpoint: 'KubernetesServiceConnection'  # Make sure this matches your service connection name
       namespace: 'default'
       command: 'apply'
-      arguments: '-f k8s/deployment.yaml'
+      arguments: '-f Deployment/kubernetes-resources.yaml'  # Updated path to deployment file
