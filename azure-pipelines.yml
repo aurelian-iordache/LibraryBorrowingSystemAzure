@@ -32,7 +32,7 @@ steps:
     displayName: 'Deploy to AKS'
     inputs:
       connectionType: 'Kubernetes Service Connection'
-      kubernetesServiceEndpoint: 'KubernetesServiceConnection'  # Make sure this matches your service connection name
+      kubernetesServiceEndpoint: 'KubernetesServiceConnection'
       namespace: 'default'
       command: 'apply'
-      arguments: '-f Deployment/kubernetes-resources.yaml'  # Updated path to deployment file
+      arguments: '-f /azure-deployment.yaml'
