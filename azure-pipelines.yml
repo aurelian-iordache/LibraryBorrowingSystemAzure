@@ -18,7 +18,7 @@ steps:
     inputs:
       command: build
       repository: bluesurviver/library-borrowing-system
-      dockerfile: '/BorrowingManagement/Dockerfile'
+      dockerfile: 'BorrowingManagement/Dockerfile'
       tags: latest
 
   - task: Docker@2
