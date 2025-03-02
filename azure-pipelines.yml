@@ -35,4 +35,4 @@ steps:
       kubernetesServiceEndpoint: 'KubernetesServiceConnection'
       namespace: 'default'
       command: 'apply'
-      arguments: '-f /azure-deployment.yaml'
+      arguments: '-f azure-deployment.yaml'
