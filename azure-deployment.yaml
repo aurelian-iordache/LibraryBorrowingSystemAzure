@@ -214,30 +214,27 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: borrowingmanagement.local
-    http:
+  - http:
       paths:
-      - path: /
+      - path: /borrowingmanagement
         pathType: Prefix
         backend:
           service:
             name: borrowingmanagement-service
             port:
               number: 80
-  - host: inventorymanagement.local
-    http:
+  - http:
       paths:
-      - path: /
+      - path: /inventorymanagement
         pathType: Prefix
         backend:
           service:
             name: inventorymanagement-service
             port:
               number: 80
-  - host: ordersmanagement.local
-    http:
+  - http:
       paths:
-      - path: /
+      - path: /ordersmanagement
         pathType: Prefix
         backend:
           service:
