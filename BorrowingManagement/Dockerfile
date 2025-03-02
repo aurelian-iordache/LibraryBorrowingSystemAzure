@@ -15,6 +15,7 @@ WORKDIR /src
 COPY ["BorrowingManagement/BorrowingManagement.csproj", "BorrowingManagement/"]
 COPY ["CommunicationShared/CommunicationShared.csproj", "CommunicationShared/"]
 RUN dotnet restore "./BorrowingManagement/BorrowingManagement.csproj"
+RUN dotnet restore "./CommunicationShared/CommunicationShared.csproj"
 COPY . .
 WORKDIR "/src/BorrowingManagement"
 RUN dotnet build "./BorrowingManagement.csproj" -c $BUILD_CONFIGURATION -o /app/build
