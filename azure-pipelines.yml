@@ -13,20 +13,20 @@ steps:
       command: login
       containerRegistry: 'DockerHubConnection'  # Make sure this matches your service connection name
 
-  # - task: Docker@2
-  #   displayName: 'Build Docker Image'
-  #   inputs:
-  #     command: build
-  #     repository: bluesurviver/library-borrowing-system
-  #     dockerfile: 'BorrowingManagement/Dockerfile'
-  #     tags: latest
+  - task: Docker@2
+    displayName: 'Build Docker Image'
+    inputs:
+      command: build
+      repository: bluesurviver/library-borrowing-system
+      dockerfile: '/BorrowingManagement/Dockerfile'
+      tags: latest
 
-  # - task: Docker@2
-  #   displayName: 'Push Docker Image to Docker Hub'
-  #   inputs:
-  #     command: push
-  #     repository: bluesurviver/library-borrowing-system
-  #     tags: latest
+  - task: Docker@2
+    displayName: 'Push Docker Image to Docker Hub'
+    inputs:
+      command: push
+      repository: bluesurviver/library-borrowing-system
+      tags: latest
 
   - task: Kubernetes@1
     displayName: 'Deploy to AKS'
