@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - main  # Runs on push to main branch
+      - master
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -11,22 +11,54 @@ steps:
     displayName: 'Login to Docker Hub'
     inputs:
       command: login
-      containerRegistry: 'DockerHubConnection'  # Make sure this matches your service connection name
+      containerRegistry: 'DockerHubConnection'
 
-  - task: Docker@2
-    displayName: 'Build Docker Image'
+- task: Docker@2
+    displayName: 'Build OrdersManagement Docker Image'
     inputs:
       command: build
-      repository: bluesurviver/library-borrowing-system
-      dockerfile: 'BorrowingManagement/Dockerfile'
+      repository: bluesurviver/ordersmanagement
+      dockerfile: 'OrdersManagement/Dockerfile'
       buildContext: $(Build.SourcesDirectory)
       tags: latest
 
   - task: Docker@2
-    displayName: 'Push Docker Image to Docker Hub'
+    displayName: 'Build BorrowingManagement Docker Image'
+    inputs:
+      command: build
+      repository: bluesurviver/borrowingmanagement
+      dockerfile: 'BorrowingManagement/Dockerfile'
+      buildContext: $(Build.SourcesDirectory)
+      tags: latest
+
+- task: Docker@2
+    displayName: 'Build InventoryManagement Docker Image'
+    inputs:
+      command: build
+      repository: bluesurviver/inventorymanagement
+      dockerfile: 'InventoryManagement/Dockerfile'
+      buildContext: $(Build.SourcesDirectory)
+      tags: latest
+
+  - task: Docker@2
+    displayName: 'Push OrdersManagement Docker Image to Docker Hub'
     inputs:
       command: push
-      repository: bluesurviver/library-borrowing-system
+      repository: bluesurviver/ordersmanagement
+      tags: latest
+
+  - task: Docker@2
+    displayName: 'Push BorrowingManagement Docker Image to Docker Hub'
+    inputs:
+      command: push
+      repository: bluesurviver/borrowingmanagement
+      tags: latest
+
+  - task: Docker@2
+    displayName: 'Push InventoryManagement Docker Image to Docker Hub'
+    inputs:
+      command: push
+      repository: bluesurviver/inventorymanagement
       tags: latest
 
   - task: Kubernetes@1
