@@ -15,6 +15,7 @@ WORKDIR /src
 COPY ["InventoryManagement/InventoryManagement.csproj", "InventoryManagement/"]
 COPY ["CommunicationShared/CommunicationShared.csproj", "CommunicationShared/"]
 RUN dotnet restore "./InventoryManagement/InventoryManagement.csproj"
+RUN dotnet restore "./CommunicationShared/CommunicationShared.csproj"
 COPY . .
 WORKDIR "/src/InventoryManagement"
 RUN dotnet build "./InventoryManagement.csproj" -c $BUILD_CONFIGURATION -o /app/build

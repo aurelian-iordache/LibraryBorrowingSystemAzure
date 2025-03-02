@@ -15,6 +15,7 @@ WORKDIR /src
 COPY ["OrdersManagement/OrdersManagement.csproj", "OrdersManagement/"]
 COPY ["CommunicationShared/CommunicationShared.csproj", "CommunicationShared/"]
 RUN dotnet restore "./OrdersManagement/OrdersManagement.csproj"
+RUN dotnet restore "./CommunicationShared/CommunicationShared.csproj"
 COPY . .
 WORKDIR "/src/OrdersManagement"
 RUN dotnet build "./OrdersManagement.csproj" -c $BUILD_CONFIGURATION -o /app/build
